@@ -1,0 +1,54 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    
+}
+/* li ul a{
+    text-decoration: none;
+   
+}
+ul{
+    display: flex;
+    justify-content: flex-end;
+} */
+/* #nav{
+    background-color: #eedab0;
+} */
+/* 
+.subcatogaries{
+    background-color: #d4c5b3;
+} */
+
+#nav {
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .container {
+    max-width: 1200px;
+  }
+  
+  @media (max-width: 768px) {
+    .hidden.md\:flex {
+      display: none;
+    }
+  
+    #mobile-menu {
+      display: flex;
+    }
+  }
+  
+  #mobile-menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #mobile-menu a {
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  
