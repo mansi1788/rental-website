@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import logo from '../assests/happysell.png';
 import logo2 from '../assests/order.png';
 import logo3 from '../assests/promotion.png';
@@ -6,9 +6,17 @@ import logo4 from '../assests/savemoney.png';
 import logo5 from '../assests/support.png';
 import logo6 from '../assests/shipping.png';
 
-
-
 const Subcategories = () => {
+  const [products, setProducts] = useState([]);
+
+  // Fetch data from the fake store API
+  useEffect(() => {
+    fetch('https://fakestoreapi.com/products')
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
+
   return (
     <>
       {/* Subcategories Section */}
@@ -57,10 +65,9 @@ const Subcategories = () => {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
-    
 
-
-
+      {/* Boxes Section */}
+      
       <div className='flex flex-wrap justify-center gap-6 p-24'>
         <div className='box w-48 h-48 flex flex-col justify-center items-center bg-blue-200 shadow-lg hover:animate-shake transition-transform duration-300 rounded-md'>
           <img src={logo} alt='logo1' className='w-32 h-32 mb-2' />
@@ -88,15 +95,91 @@ const Subcategories = () => {
         </div>
       </div>
 
+     
 
-      {/* FEATURED PRODUCT */}
+      {/* FEATURED PRODUCT SECTION */} 
+<h1 className='text-6xl text-center font-bold mt-14 mb-6'>FEATURED PRODUCT</h1>
+<h4 className='text-center text-2xl mb-10 text-gray-600'>Summer Collection New Modern Design</h4>
 
-      <h1 className='text-6xl justify-center flex mt-14'>FEATURED PRODUCT</h1>
-      <h4 className='justify-center flex text-2x'>Summer Collection New Modern Design</h4>
+<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-8 bg-orange-200'>
+  {products.slice(0, 8).map((product) => (
+    <div
+      key={product.id}
+      className='flex flex-col items-center bg-white p-4 shadow-xl rounded-lg transform transition-transform duration-500 hover:scale-105 hover:shadow-2xl hover:rotate-3'
+    >
+      <img
+        src={product.image}
+        alt={product.title}
+        className='w-40 h-40 mb-4 object-contain'
+      />
+      <h3 className='text-lg font-bold mb-2'>{product.title}</h3>
+      <p className='text-gray-600 text-xl font-semibold mb-4'>${product.price}</p>
+      <button className='bg-blue-600 text-white py-2 px-4 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors duration-300'>
+        Add to Cart
+      </button>
+    </div>
+  ))}
+</div>
+
+{/* men & womem */}
 
 
+<div className='menandwomen'>
+  {/* Men's Section */}
+  <div className='men flex justify-between items-center p-8'>
+  
+  
+    <div className='men-text flex-1'>
+      <h2 className='text-3xl font-bold'>Men's Collection</h2>
+      <p className='mt-4'>Discover the latest styles in men's fashion. From casual wear to formal outfits.</p>
+    </div>
+   
+    <div className='men-image flex-1'>
+      <img src='https://codewithsadee.github.io/anon-ecommerce-website/assets/images/products/shampoo.jpg' alt='Men Fashion' className='w-full h-auto object-cover rounded-md' />
+    </div>
+  </div>
+
+  {/* Women's Section */}
+  <div className='women flex justify-between items-center p-8'>
+   
+    <div className='women-image flex-1'>
+      <img src='https://codewithsadee.github.io/anon-ecommerce-website/assets/images/products/shampoo.jpg' alt='Women Fashion' className='w-full h-auto object-cover rounded-md' />
+    </div>
+ 
+    <div className='women-text flex-1'>
+      <h2 className='text-3xl font-bold'>Women's Collection</h2>
+      <p className='mt-4'>Explore elegant and stylish outfits designed for the woman.</p>
+    </div>
+  </div>
+</div>
+
+
+{/* hot offers */}
+<h1 className=' text-center text-3xl font-bold mt-14 mb-6'>HOT OFFERS</h1>
+<h4 className='text-center  mb-10 text-gray-600'>Summer Collection New Modern Design</h4>
+
+<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-8 bg-orange-200'>
+  {products.slice(0, 8).map((product) => (
+    <div
+      key={product.id}
+      className='flex flex-col items-center bg-white p-4 shadow-xl rounded-lg transform transition-transform duration-500 hover:scale-105 hover:shadow-2xl hover:rotate-3'
+    >
+      <img
+        src={product.image}
+        alt={product.title}
+        className='w-40 h-40 mb-4 object-contain'
+      />
+      <h3 className='text-lg font-bold mb-2'>{product.title}</h3>
+      <p className='text-gray-600 text-xl font-semibold mb-4'>${product.price}</p>
+      <button className='bg-blue-600 text-white py-2 px-4 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors duration-300'>
+        Add to Cart
+      </button>
+    </div>
+  ))}
+</div>
+<div className='mt-5'></div>
     </>
-  )
-}
+  );
+};
 
 export default Subcategories;

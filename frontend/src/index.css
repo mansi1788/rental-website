@@ -1,3 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.menwhite{
+
+
+    display: inline;
+}
+
+.footer {
+    background-color: #282828;  /* Dark background for a stylish look */
+    padding: 40px 0;  /* Adds some space around the content */
+    color: #fff;  /* White text for contrast */
+  }
+  
+  .footer ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer li {
+    margin: 10px 0;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .footer-column {
+    flex: 1;
+    margin-right: 20px; /* Adds space between columns */
+  }
+  
+  .footer li:hover {
+    color: #f5a623;  /* Changes text color on hover */
+    transition: color 0.3s ease;  /* Smooth transition effect */
+  }
+  
+  .footer .flex {
+    display: flex;
+    justify-content: space-between;  /* Spreads columns evenly */
+    max-width: 1200px;
+    margin: 0 auto;  /* Centers the footer */
+  }
+  
+  .footer li:hover {
+    transform: translateX(5px);  /* Slight move on hover */
+    transition: transform 0.3s ease;
+  }
+  

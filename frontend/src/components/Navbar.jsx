@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <motion.nav
       id="nav"
-      className="fixed top-0 left-0 right-0 py-4 shadow-lg z-50 bg-white"
+      className="fixed top-0 left-0 right-0 py-4 shadow-lg z-50 "
       initial={{ opacity: 0, y: -50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
@@ -60,7 +60,11 @@ const Navbar = () => {
               <i className="fa-regular fa-heart"></i>
             </a>
           </motion.li>
-
+          <motion.li whileHover={{ scale: 1.1 }} transition={{ type: 'spring', stiffness: 300 }}>
+            <a href="/favorites" className="text-black hover:text-gray-600">
+            <i class="fa-solid fa-cart-shopping"></i>       
+            </a>
+          </motion.li>
           {/* Dropdown menu for user */}
           <motion.li
             className="nav-item dropdown"
