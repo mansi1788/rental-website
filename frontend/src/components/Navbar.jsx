@@ -138,25 +138,19 @@ const Navbar = () => {
             </Link>
           </motion.li>
           <motion.li whileHover={{ scale: 1.1 }} transition={{ type: 'spring', stiffness: 300 }}>
-            <a href="/favorites" className="text-black hover:text-gray-600">
-            <i class="fa-solid fa-cart-shopping"></i>       
-            </a>
-          </motion.li>
-
-          {/* <motion.li whileHover={{ scale: 1.1 }}>
-            <Link to="/register" className="text-black hover:text-gray-600">Register</Link>
-          </motion.li>
-          <motion.li whileHover={{ scale: 1.1 }}>
-            <Link to="/login" className="text-black hover:text-gray-600">Login</Link>
-          </motion.li> */}
+  <Link to="/cart" className="text-black hover:text-gray-600">
+    <i className="fa-solid fa-cart-shopping"></i>
+  </Link>
+</motion.li>
 
           <motion.li
             className="nav-item dropdown"
             whileHover={{ scale: 1.1 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
-            <Link className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i className="fa-regular fa-user"></i>
+            <Link className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" 
+            aria-expanded="false">
+            <i className="fa-regular fa-user"></i>
            </Link>
             <ul className="dropdown-menu bg-white">
               <li><Link className="dropdown-item" to="/register">Register</Link></li>

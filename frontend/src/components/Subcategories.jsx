@@ -9,7 +9,19 @@ import logo5 from '../assests/support.png';
 import logo6 from '../assests/shipping.png';
 import { Link } from 'react-router-dom'; 
 
+
+function len(d){
+
+  const words = d.split("");
+  if(words.length>30){
+  return words.slice(0,30).join("")+"...";
+}
+
+return d;
+  }
+
 const Subcategories = () => {
+
   const [products, setProducts] = useState([]);
 
   // Fetch data from the fake store API
@@ -70,7 +82,7 @@ const Subcategories = () => {
       </div>
 
       {/* Boxes Section */}
-//      <div className='flex flex-wrap justify-center gap-6 p-24'>
+      <div className='flex flex-wrap justify-center gap-6 p-24'>
 <div className='box w-48 h-48 flex flex-col justify-center items-center bg-blue-200 shadow-lg hover:animate-shake transition-transform duration-300 rounded-md'>
 <img src={logo} alt='logo1' className='w-32 h-32 mb-2' />
 <p className='text-center text-blue-800'><button className='bg-blue-400 text-white py-1 px-3 rounded-md hover:bg-blue-500'>Happy Sell</button></p>
@@ -111,7 +123,7 @@ const Subcategories = () => {
                   alt={product.title}
                   className='w-40 h-40 mb-4 object-contain'
                 />
-                <h3 className='text-lg font-bold mb-2'>{product.title}</h3>
+                <h3 className='text-lg font-bold mb-2'>{len(product.title)}</h3>
                 <p className='text-gray-600 text-xl font-semibold mb-4'>${product.price}</p>
                 <button className='bg-blue-600 text-white py-2 px-4 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors duration-300'>
                   Add to Cart
@@ -164,7 +176,7 @@ const Subcategories = () => {
                   alt={product.title}
                   className='w-40 h-40 mb-4 object-contain'
                 />
-                <h3 className='text-lg font-bold mb-2'>{product.title}</h3>
+                <h3 className='text-lg font-bold mb-2'>{len(product.title)}</h3>
                 <p className='text-gray-600 text-xl font-semibold mb-4'>${product.price}</p>
                 <button className='bg-blue-600 text-white py-2 px-4 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors duration-300'>
                   Add to Cart

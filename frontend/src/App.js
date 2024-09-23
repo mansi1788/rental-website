@@ -1,35 +1,3 @@
-// import React from 'react';
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import Navbar from './components/Navbar';
-// import Footer from './components/Footer';
-// import Login from './components/Login';
-// import Subcategories from './components/Subcategories';
-// import Signup from './components/Signup';
-// import ProductDetail from './components/Productdetail';
-
-// function App() {
-//   return (
-//     <Router>
-//       <Navbar />
-//       <Routes>
-//         <Route path="/" element={<Subcategories />} />
-//         <Route path="/register" element={<Signup />} />
-//         <Route path="/login" element={<Login />} />
-
-//         <Route path="/" element={<Subcategories />} />
-//         <Route path="/product/:id" element={<ProductDetail />} />
-
-//         <Route path="/" exact component={Subcategories} />
-//         <Route path="/product/:id" render={(props) => <ProductDetail {...props} products={products} />} />
-//       </Routes>
-//       <Footer />
-//     </Router>
-//   );
-// }
-
-// export default App;
-
-
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -37,7 +5,12 @@ import Footer from './components/Footer';
 import Login from './components/Login';
 import Subcategories from './components/Subcategories';
 import Signup from './components/Signup';
-import Productdetail from './components/Productdetail';
+import ProductDetail from './components/Productdetail';
+import Addtocart from './components/Addtocart';
+import { CartProvider } from './context/Cartcontext';
+import { FavoritesProvider } from './context/FavoritesContext'; // Import FavoritesProvider
+import Favorites from './components/Favorites';
+import Shop from './components/Shop';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -51,17 +24,24 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Subcategories />} />
-        <Route path="/register" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/product/:id" element={<Productdetail products={products} />} />
-      </Routes>
-      <Footer />
-    </Router>
-  );
+      <CartProvider>
+        <FavoritesProvider> {/* Wrap the entire app */}
+          <Router>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Subcategories />} />
+              <Route path="/shop" element={<Shop/>}/>
+              <Route path="/register" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/product/:id" element={<ProductDetail products={products} />} />
+              <Route path="/cart" element={<Addtocart />} />
+              <Route path="/favorites" element={<Favorites />} /> {/* No need to pass props */}
+            </Routes>
+            <Footer />
+          </Router>
+        </FavoritesProvider>
+      </CartProvider>
+    );
 }
 
 export default App;
