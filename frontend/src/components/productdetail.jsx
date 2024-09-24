@@ -18,7 +18,7 @@ const ProductDetail = ({ products = [] }) => {
 
   const { title, description, image, category, price } = product;
   const isProductInCart = cart.some((cartItem) => cartItem.id === product.id);
-  const isProductInFav = favorites.some((favItem) => favItem.id === product.id); // Check against favorites
+  const isProductInFav = favorites.some((favItem) => favItem.id === product.id); 
 
   const handleAddToCart = () => {
     if (!isProductInCart) {
