@@ -28,7 +28,7 @@ const Shop = () => {
   const handleFilterChange = (category) => {
     setSelectedCategory(category);
 
-    if (category === '') {
+    if (category === '') { // al catories will show
       setFilteredProducts(products); // Reset to all products
     } else {
       const filtered = products.filter((product) =>
