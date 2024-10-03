@@ -19,7 +19,7 @@ const Addtocart = () => {
             <img src={item.image} alt={item.title} className="w-20 h-20 object-cover rounded-lg" />
             <div className="ml-4">
               <h4 className="text-xl font-semibold">{item.title}</h4>
-              <p className="text-gray-600">Price: ${item.price}</p>
+              <p className="text-gray-600">Price: <i class="fa fa-inr" aria-hidden="true"> {item.price*50}</i></p>
             </div>
           </div>
           

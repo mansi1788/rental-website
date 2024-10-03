@@ -5,12 +5,14 @@ import Footer from './components/Footer';
 import Login from './components/Login';
 import Subcategories from './components/Subcategories';
 import Signup from './components/Signup';
+import Profile from './components/Profile';
 import ProductDetail from './components/Productdetail';
 import Addtocart from './components/Addtocart';
 import { CartProvider } from './context/Cartcontext';
 import { FavoritesProvider } from './context/FavoritesContext'; // Import FavoritesProvider
 import Favorites from './components/Favorites';
 import Shop from './components/Shop';
+import Contact from './components/Contact';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -33,9 +35,11 @@ function App() {
               <Route path="/shop" element={<Shop/>}/>
               <Route path="/register" element={<Signup />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/profile" element={<Profile/>} />
               <Route path="/product/:id" element={<ProductDetail products={products} />} />
               <Route path="/cart" element={<Addtocart />} />
-              <Route path="/favorites" element={<Favorites />} /> {/* No need to pass props */}
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/contact" element={<Contact />} /> {/* No need to pass props */}
             </Routes>
             <Footer />
           </Router>

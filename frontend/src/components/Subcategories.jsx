@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import logo from '../assests/happysell.png';
 import logo2 from '../assests/order.png';
@@ -46,10 +44,12 @@ const Subcategories = () => {
         </ul>
       </div>
 
+
       {/* Carousel Section */}
-      <div id="carouselExample" className="carousel slide">
-        <div className="carousel-inner">
-          <div className="carousel-item active">
+      <div id="carouselExample" className="carousel slide" >
+        <div className="carousel-inner" >
+          <div className="carousel-item active" 
+          >
             <img
               src="https://images.unsplash.com/photo-1503340588524-222d094c7066?w=800&h=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGFkdmVydGlzZW1lbnQlMjBjbG90aGVzfGVufDB8fDB8fHww"
               className="d-block w-full h-96 object-cover"
@@ -124,7 +124,7 @@ const Subcategories = () => {
                   className='w-40 h-40 mb-4 object-contain'
                 />
                 <h3 className='text-lg font-bold mb-2'>{len(product.title)}</h3>
-                <p className='text-gray-600 text-xl font-semibold mb-4'>${product.price}</p>
+                <p className='text-gray-600 text-xl font-semibold mb-4'><i class="fa fa-inr" aria-hidden="true"> {product.price*50}</i></p>
                 <button className='bg-blue-600 text-white py-2 px-4 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors duration-300'>
                   Add to Cart
                 </button>
@@ -177,7 +177,7 @@ const Subcategories = () => {
                   className='w-40 h-40 mb-4 object-contain'
                 />
                 <h3 className='text-lg font-bold mb-2'>{len(product.title)}</h3>
-                <p className='text-gray-600 text-xl font-semibold mb-4'>${product.price}</p>
+                <p className='text-gray-600 text-xl font-semibold mb-4'><i class="fa fa-inr" aria-hidden="true"> {product.price*50}</i></p>
                 <button className='bg-blue-600 text-white py-2 px-4 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors duration-300'>
                   Add to Cart
                 </button>

@@ -9,6 +9,19 @@ import './Navbar.css';
 const Navbar = () => {
   const { favorites } = useContext(FavoritesContext);
   const { cart } = useContext(CartContext);
+  // const [success, setSuccess] = useState(null);
+
+  // const handlelogin =()=>{
+  
+  //   window.location.href='/';
+
+  // }
+  const handlelogout=()=>{
+    localStorage.removeItem("token");
+    window.location.href='/';
+    alert("logout successfully");
+  }
+
   return (
     <motion.nav id="nav" className="fixed top-0 left-0 right-0 py-2 shadow-lg z-50">
       <div className="container flex justify-between items-center mx-auto px-4 sm:px-6 lg:px-8">
@@ -57,16 +70,19 @@ const Navbar = () => {
             whileHover={{ scale: 1.1 }}
             transition={{ type: 'spring', stiffness: 300 }}
           >
+            
             <Link className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" 
             aria-expanded="false">
             <i className="fa-regular fa-user text-2xl"></i>
            </Link>
             <ul className="dropdown-menu bg-white">
               <li><Link className="dropdown-item" to="/register">Register</Link></li>
-              <li><Link className="dropdown-item" to="/login">Login</Link></li>
+              <li><Link className="dropdown-item" to="/login" >Login</Link></li>
+              <li><Link className="dropdown-item" to="/logout" onClick={handlelogout}>Logout</Link></li>
               <li><hr className="dropdown-divider" /></li>
-              <li><Link className="dropdown-item" to="#">
-                <i className="fa-regular fa-user">Profile</i></Link></li>
+              <li>
+                <Link className="dropdown-item" to="/profile">
+                <i className="fa-regular fa-user" >Profile</i></Link></li>
             </ul>
           </motion.li>
         </ul>

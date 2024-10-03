@@ -3,6 +3,17 @@ import { FavoritesContext } from '../context/FavoritesContext'; // Import Favori
 import { CartContext } from '../context/Cartcontext';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom'; 
+
+function len(d){
+
+  const words = d.split("");
+  if(words.length>30){
+  return words.slice(0,30).join("")+"...";
+}
+
+return d;
+  }
 
 const ProductDetail = ({ products = [] }) => {
   const { id } = useParams();
@@ -26,8 +37,11 @@ const ProductDetail = ({ products = [] }) => {
       navigate('/cart');
     }
   };
-
+  const similarProducts = products.filter(
+    (prod) => prod.category === category && prod.id !== product.id
+  );
   return (
+    <>
     <div className="container mx-auto p-4 mt-40">
       <div className="flex flex-col md:flex-row items-center">
         <div className="md:w-1/2">
@@ -55,11 +69,11 @@ const ProductDetail = ({ products = [] }) => {
             </button>
           </div>
 
-          <p className="text-gray-600 text-lg mt-1">
+          {/* <p className="text-gray-600 text-lg mt-1">
             Category: <span className="font-bold">{category}</span>
-          </p>
+          </p> */}
           <p className="mt-4 text-gray-800">{description}</p>
-          <h4 className="mt-6 text-2xl font-bold text-blue-600">Price: ${price}</h4>
+          <h4 className="mt-6 text-2xl font-bold text-blue-600">Price: <i class="fa fa-inr" aria-hidden="true"> {product.price*50}</i></h4>
 
           <button
             onClick={handleAddToCart}
@@ -78,6 +92,32 @@ const ProductDetail = ({ products = [] }) => {
         </div>
       </div>
     </div>
+
+<div>
+<h1 className='text-6xl text-center font-serif mt-14 mb-6'>SIMILAR PRODUCTS</h1>
+
+<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-8 bg-orange-200'>
+  {similarProducts.slice(0, 8).map((product) => (
+    <Link to={`/product/${product.id}`} key={product.id}>
+      <div className='flex flex-col items-center bg-white p-4 shadow-xl rounded-lg
+       transform transition-transform duration-500 hover:scale-105 hover:shadow-2xl hover:rotate-3'>
+        <img
+          src={product.image}
+          alt={product.title}
+          className='w-40 h-40 mb-4 object-contain'
+        />
+        <h3 className='text-lg font-bold mb-2'>{len(product.title)}</h3>
+        <p className='text-gray-600 text-xl font-semibold mb-4'><i class="fa fa-inr" aria-hidden="true"> {product.price*50}</i></p>
+        <button className='bg-blue-600 text-white py-2 px-4 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors duration-300'>
+          Add to Cart
+        </button>
+      </div>      
+    </Link>
+  ))}
+</div>
+</div>
+<div className='mt-3'></div>
+</>
   );
 };
 

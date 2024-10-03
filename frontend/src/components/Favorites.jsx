@@ -20,7 +20,7 @@ const Favorites = () => {
             <img src={product.image} alt={product.title} className="w-20 h-20 object-cover rounded-lg" />
             <div className="ml-4">
               <h4 className="text-xl font-semibold">{product.title}</h4>
-              <p className="text-gray-600">Price: ${product.price}</p>
+              <p className="text-gray-600">Price: <i class="fa fa-inr" aria-hidden="true"> {product.price*50}</i></p>
             </div>
            
          </div>
