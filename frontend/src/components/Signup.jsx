@@ -22,7 +22,6 @@ const Signup = () => {
         phone,
         address,
       });
-
       // Handle the response from the backend
       console.log('Registration successful:', response.data);
       setSuccess('Registration successful! You can now log in.');
