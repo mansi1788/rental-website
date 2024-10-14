@@ -63,22 +63,44 @@ const Shop = () => {
     }
   };
 
+  const [categories, setCategories] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        // Fetching categories from the backend
+        const response = await axios.get('http://localhost:8000/api/categories');
+        setCategories(response.data); // Assuming the data is an array of categories
+      } catch (err) {
+        setError('Error fetching categories');
+        console.error(err);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   
   return (
     <>
 
-      <div className='subcategories p-4 rounded-md shadow-md bg-white mt-20'>
-
-        <ul className='flex space-x-6 justify-center'>
-          <li className='hover:bg-gray-200 px-4 py-2 rounded cursor-pointer' onClick={() => handleFilterChange('men')}>Men's</li>
-          <li className='hover:bg-gray-200 px-4 py-2 rounded cursor-pointer' onClick={() => handleFilterChange('women')}>Women's</li>
-          <li className='hover:bg-gray-200 px-4 py-2 rounded cursor-pointer' onClick={() => handleFilterChange('jewelery')}>Jewelry</li>
-          <li className='hover:bg-gray-200 px-4 py-2 rounded cursor-pointer' onClick={() => handleFilterChange('perfume')}>Perfume</li>
-          <li className='hover:bg-gray-200 px-4 py-2 rounded cursor-pointer' onClick={() => handleFilterChange('blog')}>Blog</li>
-          <li className='hover:bg-gray-200 px-4 py-2 rounded cursor-pointer' onClick={() => handleFilterChange('hot offers')}>Hot Offers</li>
-        </ul>
-
-      </div>
+<div className='subcategories p-4 rounded-md shadow-md bg-white mt-20'>
+      <ul className='flex space-x-6 justify-center'>
+        {categories.length > 0 ? (
+          categories.map((category) => (
+            <li
+              key={category.id} // Assuming each category has a unique 'id'
+              className='hover:bg-gray-200 px-4 py-2 rounded cursor-pointer'
+            >
+              {category.name} {/* Adjust according to your API response */}
+            </li>
+          ))
+        ) : (
+          <li>Loading categories...</li>
+        )}
+      </ul>
+    </div>
 
       <div>      
 

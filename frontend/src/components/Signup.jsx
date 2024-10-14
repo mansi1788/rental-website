@@ -13,7 +13,7 @@ const Signup = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await axios.post('http://localhost:8000/register', {
         name,
@@ -22,23 +22,36 @@ const Signup = () => {
         phone,
         address,
       });
-      // Handle the response from the backend
-      console.log('Registration successful:', response.data);
-      setSuccess('Registration successful! You can now log in.');
-      setError(null); // Clear any previous errors
 
-      // Reset form fields
+
+      // Log the response data to check if the ID is included
+      console.log('Response data:', response.data);
+  
+      // Check if the id exists in the response
+      
+      const userId = response.data.newRegister?.id || response.data?.user?.id; // Check where your backend returns the user ID
+      if (userId) {
+        localStorage.setItem('id', userId);
+        console.log('User ID stored:', userId);
+      } else {
+        console.error('User ID not found in the response',userId);
+      }
+      
+
+      setSuccess('Registration successful! You can now log in.');
+      setError(null);
       setName('');
       setEmail('');
       setPassword('');
       setPhone('');
       setAddress('');
-      
     } catch (err) {
       console.error('Registration failed:', err.response ? err.response.data : err.message);
       setError('Registration failed. Please try again.');
     }
   };
+  
+  
   return (
     <>
     

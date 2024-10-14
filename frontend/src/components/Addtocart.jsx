@@ -9,6 +9,8 @@ const Addtocart = () => {
     return <h2 className="text-center text-2xl mt-36">Your cart is empty</h2>;
   }
 
+  
+
   return (
     <div className="container mx-auto p-4 mt-40">
       <h2 className="text-4xl font-semibold mb-4">Your Cart</h2>

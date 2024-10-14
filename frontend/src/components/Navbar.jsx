@@ -65,26 +65,27 @@ const Navbar = () => {
   </Link>
 </motion.li>
 
-          <motion.li
-            className="nav-item dropdown"
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: 'spring', stiffness: 300 }}
-          >
-            
-            <Link className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" 
-            aria-expanded="false">
-            <i className="fa-regular fa-user text-2xl"></i>
-           </Link>
-            <ul className="dropdown-menu bg-white">
-              <li><Link className="dropdown-item" to="/register">Register</Link></li>
-              <li><Link className="dropdown-item" to="/login" >Login</Link></li>
-              <li><Link className="dropdown-item" to="/logout" onClick={handlelogout}>Logout</Link></li>
-              <li><hr className="dropdown-divider" /></li>
-              <li>
-                <Link className="dropdown-item" to="/profile">
-                <i className="fa-regular fa-user" >Profile</i></Link></li>
-            </ul>
-          </motion.li>
+<motion.li
+  className="nav-item dropdown"
+  whileHover={{ scale: 1.1 }}
+  transition={{ type: 'spring', stiffness: 300 }}
+>
+  <Link className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i className="fa-regular fa-user text-2xl"></i>
+  </Link>
+  <ul className="dropdown-menu bg-white">
+    <li><Link className="dropdown-item" to="/register">Register</Link></li>
+    <li><Link className="dropdown-item" to="/login">Login</Link></li>
+    <li><Link className="dropdown-item" to="/logout" onClick={handlelogout}>Logout</Link></li>
+    <li><hr className="dropdown-divider" /></li>
+    <li>
+      <Link className="dropdown-item" to={`/profile/${localStorage.getItem('id')}`}>
+        <i className="fa-regular fa-user">Profile</i>
+      </Link>
+    </li>
+  </ul>
+</motion.li>
+
         </ul>
       </div>
     </motion.nav>

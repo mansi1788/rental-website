@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useState,useContext } from 'react';
 import { FavoritesContext } from '../context/FavoritesContext'; // Import FavoritesContext
 import { CartContext } from '../context/Cartcontext';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom'; 
+import axios from 'axios';
 
 function len(d){
 
@@ -15,10 +16,13 @@ function len(d){
 return d;
   }
 
-const ProductDetail = ({ products = [] }) => {
+const ProductDetail = ({ products = [], userId  }) => {
   const { id } = useParams();
   const { cart, addToCart } = useContext(CartContext);
   const { favorites, addToFavorites } = useContext(FavoritesContext); // Use favorites context
+  const [quantity, setQuantity] = useState(1);
+  const [message, setMessage] = useState('');
+
   const navigate = useNavigate();
 
   const product = products.find((product) => product.id === parseInt(id));
@@ -31,12 +35,27 @@ const ProductDetail = ({ products = [] }) => {
   const isProductInCart = cart.some((cartItem) => cartItem.id === product.id);
   const isProductInFav = favorites.some((favItem) => favItem.id === product.id); 
 
-  const handleAddToCart = () => {
-    if (!isProductInCart) {
-      addToCart(product);
-      navigate('/cart');
+  
+
+  const handleAddToCart = async () => {
+    try {
+      const response = await axios.post('http://localhost:8000/api/cart', {
+        userId,
+        productId:product.id,
+        quantity,
+      });
+
+      if (response.data.success) {
+        setMessage('Item added to cart successfully!');
+      } else {
+        setMessage('Error adding item to cart.');
+      }
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      setMessage('Error adding item to cart.');
     }
   };
+
   const similarProducts = products.filter(
     (prod) => prod.category === category && prod.id !== product.id
   );

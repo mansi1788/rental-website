@@ -6,7 +6,7 @@ import logo4 from '../assests/savemoney.png';
 import logo5 from '../assests/support.png';
 import logo6 from '../assests/shipping.png';
 import { Link } from 'react-router-dom'; 
-
+import axios from 'axios';
 
 function len(d){
 
@@ -30,19 +30,51 @@ const Subcategories = () => {
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
 
+
+
+
+  const [categories, setCategories] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        // Fetching categories from the backend
+        const response = await axios.get('http://localhost:8000/api/categories');
+        setCategories(response.data); // Assuming the data is an array of categories
+      } catch (err) {
+        setError('Error fetching categories');
+        console.error(err);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
     <>
       {/* Subcategories Section */}
       <div className='subcategories p-4 rounded-md shadow-md bg-white mt-20'>
-        <ul className='flex space-x-6 justify-center'>
-          <li className='hover:bg-gray-200 px-4 py-2 rounded cursor-pointer'>Men's</li>
-          <li className='hover:bg-gray-200 px-4 py-2 rounded cursor-pointer'>Women's</li>
-          <li className='hover:bg-gray-200 px-4 py-2 rounded cursor-pointer'>Jewelry</li>
-          <li className='hover:bg-gray-200 px-4 py-2 rounded cursor-pointer'>Perfume</li>
-          <li className='hover:bg-gray-200 px-4 py-2 rounded cursor-pointer'>Blog</li>
-          <li className='hover:bg-gray-200 px-4 py-2 rounded cursor-pointer'>Hot Offers</li>
-        </ul>
-      </div>
+      <ul className='flex space-x-6 justify-center'>
+        {categories.length > 0 ? (
+          categories.map((category) => (
+            <li
+              key={category.id} // Assuming each category has a unique 'id'
+              className='hover:bg-gray-200 px-4 py-2 rounded cursor-pointer'
+            >
+              {category.name} {/* Adjust according to your API response */}
+            </li>
+          ))
+        ) : (
+          <li>Loading categories...</li>
+        )}
+      </ul>
+    </div>
+
 
 
       {/* Carousel Section */}
