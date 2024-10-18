@@ -17,26 +17,27 @@ const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
 
 
-  // Fetch data from the fake store API
-  // useEffect(() => {
-  //   // fetch('https://fakestoreapi.com/products')
-
-  //   axios.get('http://localhost:8000/api/categories')
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setProducts(data);
-  //       setFilteredProducts(data); // Initially display all products
-  //     })
-  //     .catch((error) => console.error('Error fetching data:', error));
-  // }, []);
+  //Fetch data from the fake store API
   useEffect(() => {
-    axios.get('http://localhost:8000/api/categories')
-      .then((res) => {
-        setProducts(res.data); // res.data contains the JSON response
-        setFilteredProducts(res.data); // Initially display all products
+    fetch('https://fakestoreapi.com/products')
+
+    //axios.get('http://localhost:8000/api/categories')
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(data);
+        setFilteredProducts(data); // Initially display all products
       })
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
+
+  // useEffect(() => {
+  //   axios.get('http://localhost:8000/api/categories')
+  //     .then((res) => {
+  //       setProducts(res.data); // res.data contains the JSON response
+  //       setFilteredProducts(res.data); // Initially display all products
+  //     })
+  //     .catch((error) => console.error('Error fetching data:', error));
+  // }, []);
 
   const handleFilterChange = (category) => {
     setSelectedCategory(category);
@@ -66,20 +67,20 @@ const Shop = () => {
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        // Fetching categories from the backend
-        const response = await axios.get('http://localhost:8000/api/categories');
-        setCategories(response.data); // Assuming the data is an array of categories
-      } catch (err) {
-        setError('Error fetching categories');
-        console.error(err);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchCategories = async () => {
+  //     try {
+  //       // Fetching categories from the backend
+  //       const response = await axios.get('http://localhost:8000/api/categories');
+  //       setCategories(response.data); // Assuming the data is an array of categories
+  //     } catch (err) {
+  //       setError('Error fetching categories');
+  //       console.error(err);
+  //     }
+  //   };
 
-    fetchCategories();
-  }, []);
+  //   fetchCategories();
+  // }, []);
 
   
   return (
@@ -155,20 +156,26 @@ const Shop = () => {
             
           </div>
 
-          <div className='flex grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-8 w-full bg-orange-200'>
+          <div className='flex grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4
+           gap-6 p-8 w-full bg-orange-200'>
             {filteredProducts.slice(0, 8).map((product) => (
               <Link to={`/product/${product.id}`} key={product.id}>
-                <div className='flex flex-col items-center bg-white p-4 shadow-xl rounded-lg transform transition-transform duration-500 hover:scale-105 hover:shadow-2xl hover:rotate-3'>
+                <div className='flex flex-col items-center bg-white p-4 
+                shadow-xl rounded-lg transform transition-transform duration-500 hover:scale-105 
+                hover:shadow-2xl hover:rotate-3'>
                   <img
-                    //src={product.image}
-                    src={product.img}
-                   // alt={product.title}
+                    src={product.image}
+                    //src={product.img}
+                  //  alt={product.title}
+
                    alt={product.name}
                     className='w-40 h-40 mb-4 object-contain'
                   />
                   <h3 className='text-lg font-bold mb-2'>{len(product.name)}</h3>
-                  <p className='text-gray-600 text-xl font-semibold mb-4'><i className="fa fa-inr" aria-hidden="true"> {product.price * 50}</i></p>
-                  <button className='bg-blue-600 text-white py-2 px-4 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors duration-300'>
+                  <p className='text-gray-600 text-xl font-semibold mb-4'><i className="fa fa-inr" 
+                  aria-hidden="true"> {product.price * 50}</i></p>
+                  <button className='bg-blue-600 text-white py-2 px-4 rounded-lg
+                   text-sm font-semibold hover:bg-blue-700 transition-colors duration-300'>
                     Add to Cart
                   </button>
                 </div>

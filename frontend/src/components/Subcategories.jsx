@@ -10,10 +10,13 @@ import axios from 'axios';
 
 function len(d){
 
+  if (!d) return '';
   const words = d.split("");
   if(words.length>30){
   return words.slice(0,30).join("")+"...";
+  return d;
 }
+
 
 return d;
   }
@@ -30,6 +33,14 @@ const Subcategories = () => {
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
 
+  // useEffect(() => {
+  //   axios.get('http://localhost:8000/api/categories')
+  //     .then((res) => {
+  //       setProducts(res.data); // res.data contains the JSON response
+  //        // Initially display all products
+  //     })
+  //     .catch((error) => console.error('Error fetching data:', error));
+  // }, []);
 
 
 

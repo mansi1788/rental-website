@@ -1,28 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
-  const { id } = useParams(); // Get the id from the URL
-  // Fetch the user ID from localStorage if not found in useParams
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   const userId = id || localStorage.getItem('id');
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
+    
+    if (!token || !userId) {
+      setUserData(null);  
+      setError('No information available. Please login first.');
+      setTimeout(() => navigate('/login'), 3000);
+      return;
+    }
+    
     const fetchUserData = async () => {
-      if (!userId) {
-        setError('User ID is missing');
-        return;
-      }
-
       try {
-        // Update the URL to your actual API endpoint for fetching user data
-        const response = await axios.get(`http://localhost:8000/registers/${userId}`);
+        const response = await axios.get(`http://localhost:8000/registers/${userId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
-        // Check if the user data exists in the response
         if (response.data) {
-          setUserData(response.data?.user); // Assuming response.data contains the user data
+          setUserData(response.data?.user); 
         } else {
           setError('User data not found');
         }
@@ -33,20 +38,20 @@ const Profile = () => {
     };
 
     fetchUserData();
-  }, [userId]);
-  console.log('userData------------>',userData);
+  }, [userId, token, navigate]);
 
+ 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div className="text-center text-red-500 mt-20">{error}</div>;
   }
 
+ 
   if (!userData) {
-    return <div>Loading...</div>;
+    return <div className="text-center mt-20">Loading...</div>;
   }
 
   return (
-
-    <div className="mt-20 flex justify-center items-center min-h-screen">
+    <div className="mt-24 flex justify-center items-center min-h-screen">
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
         <h1 className="text-4xl font-bold text-center mb-6">User Profile</h1>
         <div className="space-y-4">
@@ -71,7 +76,5 @@ const Profile = () => {
     </div>
   );
 };
-
-
 
 export default Profile;

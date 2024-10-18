@@ -9,13 +9,7 @@ import './Navbar.css';
 const Navbar = () => {
   const { favorites } = useContext(FavoritesContext);
   const { cart } = useContext(CartContext);
-  // const [success, setSuccess] = useState(null);
 
-  // const handlelogin =()=>{
-  
-  //   window.location.href='/';
-
-  // }
   const handlelogout=()=>{
     localStorage.removeItem("token");
     window.location.href='/';
